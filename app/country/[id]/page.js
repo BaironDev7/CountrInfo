@@ -25,6 +25,7 @@ export default async function CountryDetails({ params }) {
       <p><strong>Raíz:</strong> {country.idd.root}</p>
       <p><strong>Sufijo:</strong> {country.idd.suffixes}</p>
       <p><strong>Dominio:</strong> {country.tld}</p>
+      <p><strong>Abreviación:</strong> {country.cca3}</p>
       <p><strong>Población:</strong> {country.population.toLocaleString()}</p>
       <p><strong>Área:</strong> {country.area.toLocaleString()} km²</p>
       <p><strong>País Independiente:</strong> {country.independent ? 'País independiente' : 'País No independiente'}</p>
@@ -32,22 +33,19 @@ export default async function CountryDetails({ params }) {
       <p><strong>Latitud y Longitud:</strong> {country.latlng}</p>
       <p><strong>Area (km²):</strong> {country.area}</p>
       <p><strong>Cercado de tierra:</strong> {country.landlocked ? 'Cercado por tierra' : 'No cercado por tierra'}</p>
-
-      <div>
-        <strong>Monedas:</strong>
-        {country.currencies ? (
-          <ul>
-            {Object.entries(country.currencies).map(([code, details]) => (
-              <li key={code}>
-                {details.name} ({details.symbol})
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No hay información de monedas.</p>
-        )}
-      </div>
-      <p><strong>Código Postal:</strong> {country.postalCode?.format || 'No disponible'}</p>
+      <img src={country.coatOfArms.png} alt={`Escudo de ${country.name.common}`} className="w-64 h-auto mb-4" />
+      <p><strong>Moneda(s):</strong> {
+      country.currencies 
+        ? Object.keys(country.currencies).map((currencyKey) => {
+        const currency = country.currencies[currencyKey];
+        return (
+          <span key={currencyKey}>
+            {currencyKey} - {currency.name} ({currency.symbol})
+          </span>
+          );
+        })
+        : 'No data'
+      }</p>
       <div>
         <strong>Lenguajes:</strong>
         {country.languages ? (
