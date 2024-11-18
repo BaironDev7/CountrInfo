@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-4 text-black">
-      <h1 className="text-3xl font-bold mb-4 text-green-600">CountrInfo</h1>
+      <h1 className="text-4xl text-center font-bold mb-4 text-green-600">CountrInfo</h1>
       <div className="flex flex-col md:flex-row justify-between mb-4">
         <input
           type="text"
